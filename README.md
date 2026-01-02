@@ -9,8 +9,10 @@ npm install
 npm run dev
 ```
 
-## 使い方
+## デモURL
+https://musical-smakager-ad7317.netlify.app
 
+## 使い方
 1. **参加者入力**
    - 1行につき `name, rank` を入力します。
    - rankは `S/A/B/C/D` のみです。
