@@ -1,0 +1,186 @@
+:root {
+  font-family: 'Noto Sans JP', system-ui, sans-serif;
+  color: #1f2933;
+  background: #f5f7fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+header {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 12px 0;
+}
+
+.panel {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+}
+
+textarea,
+input,
+select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd2d9;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #4b5563;
+}
+
+button.ghost {
+  background: transparent;
+  color: #374151;
+  border: 1px solid #cbd2d9;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.warning {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.dropzone {
+  border: 2px dashed #94a3b8;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.progress {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.rounds {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.round {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.round-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.teams {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.team {
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.team ul,
+.matchups ul,
+.summary ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.muted {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 0.9em;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
