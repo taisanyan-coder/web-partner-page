@@ -174,13 +174,30 @@ const handleGenerate = useCallback(() => {
 
   return (
     <div className="app">
-      <header>
-        <h1>チームシャッフル（Vite + React）</h1>
-        <p>
-          参加者を4人チームに分け、実力バランス・重複回避・リーダー偏りを抑えながら
-          ラウンドを生成します。
-        </p>
-      </header>
+  
+  <header>
+    <h1>
+      チームシャッフル生成ツール
+      <span
+        style={{
+          display: 'block',
+          fontSize: '0.45em',
+          marginTop: 4,
+          color: '#666',
+          fontWeight: 500,
+          letterSpacing: '0.08em',
+        }}
+      >
+        （crafted by 🐾 nyanco）
+      </span>
+    </h1>
+
+    <p>
+      参加者を4人チームに分け、実力バランス・重複回避・リーダー偏りを抑えながら
+      ラウンドを生成します。
+    </p>
+  </header>
+
 
       <section className="panel">
         <h2>1) 入力エリア</h2>
