@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, 
+  useState } from 'react';
 import {
   defaultOptions,
   formatRoundForDiscord,
@@ -37,6 +38,12 @@ function App() {
   const [roundsData, setRoundsData] = useState<RoundData[]>([]);
   const [summary, setSummary] = useState<Summary | null>(null);
   const [lastPlayers, setLastPlayers] = useState<Player[] | null>(null);
+ const [justFinished, setJustFinished] = useState(false);
+
+ 
+
+  // ★UX改善：生成中フラグ
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const options = useMemo(
     () => ({
@@ -59,19 +66,41 @@ function App() {
     [options, roundCount],
   );
 
-  const handleGenerate = useCallback(() => {
-    const players = parseInput(participantsText);
-    const validation = validatePlayers(players);
-    if (!validation.ok) {
-      setErrors(validation.errors);
-      setRoundsData([]);
-      setSummary(null);
-      return;
-    }
-    setErrors([]);
-    setLastPlayers(players);
-    runGenerate(players);
-  }, [participantsText, runGenerate]);
+  // ★生成：押した感を出す（0.8秒だけ生成中を表示）
+const handleGenerate = useCallback(() => {
+  if (isGenerating) return;
+
+  setIsGenerating(true);
+  setJustFinished(false);
+
+  const players = parseInput(participantsText);
+  const validation = validatePlayers(players);
+
+  if (!validation.ok) {
+    setErrors(validation.errors);
+    setRoundsData([]);
+    setSummary(null);
+    setIsGenerating(false);
+    return;
+  }
+
+  setErrors([]);
+  setLastPlayers(players);
+  runGenerate(players);
+
+  // ① 生成中…を0.8秒表示
+  setTimeout(() => {
+  setIsGenerating(false);
+  setJustFinished(true);
+
+  // 1秒後に「生成完了」を消す
+  setTimeout(() => {
+    setJustFinished(false);
+  }, 1000);
+}, 800);
+
+}, [participantsText, runGenerate]);
+
 
   const handleRegenerate = useCallback(() => {
     if (!lastPlayers) {
@@ -90,20 +119,19 @@ function App() {
     setLastPlayers(null);
   }, []);
 
- const handleOcr = useCallback(async (file: File) => {
-  setOcrProgress(0);
-  try {
-    const candidates = await ocrToCandidates(file, setOcrProgress);
-    setOcrCandidates(candidates.join('\n'));
-  } catch (e) {
-    console.error(e);
-    const message = e instanceof Error ? e.message : String(e);
-    setErrors([`OCRに失敗しました: ${message}`]);
-  } finally {
-    setOcrProgress(null);
-  }
-}, []);
-
+  const handleOcr = useCallback(async (file: File) => {
+    setOcrProgress(0);
+    try {
+      const candidates = await ocrToCandidates(file, setOcrProgress);
+      setOcrCandidates(candidates.join('\n'));
+    } catch (e) {
+      console.error(e);
+      const message = e instanceof Error ? e.message : String(e);
+      setErrors([`OCRに失敗しました: ${message}`]);
+    } finally {
+      setOcrProgress(null);
+    }
+  }, []);
 
   const handleDrop = useCallback(
     (event: React.DragEvent<HTMLDivElement>) => {
@@ -165,6 +193,7 @@ function App() {
             placeholder="すみか, A"
           />
         </label>
+
         <div className="grid">
           <label>
             ラウンド数（1〜10）
@@ -176,6 +205,7 @@ function App() {
               onChange={(event) => setRoundCount(Number(event.target.value))}
             />
           </label>
+
           <label>
             生成回数（10〜200）
             <input
@@ -186,6 +216,7 @@ function App() {
               onChange={(event) => setCandidateCount(Number(event.target.value))}
             />
           </label>
+
           <label>
             OCR反映時のデフォルトrank
             <select value={defaultRank} onChange={(event) => setDefaultRank(event.target.value)}>
@@ -197,15 +228,24 @@ function App() {
             </select>
           </label>
         </div>
+
+         
+
         <div className="button-row">
-          <button onClick={handleGenerate}>生成</button>
+          <button onClick={handleGenerate} disabled={isGenerating}>
+  {isGenerating ? '生成中…' : justFinished ? '生成完了！' : '生成'}
+</button>
+
+
           <button onClick={handleRegenerate} className="secondary">
             もう一回生成
           </button>
+
           <button onClick={handleClear} className="ghost">
             クリア
           </button>
         </div>
+
         {errors.length > 0 && (
           <div className="error">
             {errors.map((error) => (
@@ -217,11 +257,7 @@ function App() {
 
       <section className="panel">
         <h2>2) 画像から抽出（OCR）</h2>
-        <div
-          className="dropzone"
-          onDragOver={(event) => event.preventDefault()}
-          onDrop={handleDrop}
-        >
+        <div className="dropzone" onDragOver={(event) => event.preventDefault()} onDrop={handleDrop}>
           <p>画像をドラッグ＆ドロップ / クリップボード貼り付け / ファイル選択</p>
           <input
             type="file"
@@ -234,9 +270,9 @@ function App() {
             }}
           />
         </div>
-        {ocrProgress !== null && (
-          <p className="progress">OCR解析中... {ocrProgress}%</p>
-        )}
+
+        {ocrProgress !== null && <p className="progress">OCR解析中... {ocrProgress}%</p>}
+
         <label>
           参加者名候補（編集可）
           <textarea
@@ -246,6 +282,7 @@ function App() {
             placeholder="OCR候補がここに表示されます"
           />
         </label>
+
         <button onClick={handleApplyCandidates} className="secondary">
           候補を参加者欄に反映
         </button>
@@ -261,12 +298,11 @@ function App() {
               <div key={roundData.round} className="round">
                 <header className="round-header">
                   <h3>Round {roundData.round}</h3>
-                  <button
-                    onClick={() => void navigator.clipboard.writeText(roundData.discordText)}
-                  >
+                  <button onClick={() => void navigator.clipboard.writeText(roundData.discordText)}>
                     このラウンドをコピー
                   </button>
                 </header>
+
                 <div className="teams">
                   {roundData.teams.map((team, teamIndex) => {
                     const diff = team.sum - roundData.metrics.averageSum;
@@ -288,7 +324,8 @@ function App() {
                     );
                   })}
                 </div>
-                
+
+                {/* マッチアップ表示は完全削除（必要ならこのコメントを外して復活） */}
                 {/*
                 <div className="matchups">
                   <h4>対戦ペア</h4>
