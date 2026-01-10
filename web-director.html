@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webディレクター・Webデザイナー派遣 | 株式会社フェローシップ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- デザイン設定開始 --- */
+        :root {
+            --fship-blue: #00A0E9;
+            --fship-blue-dark: #0086C4;
+            --fship-text: #333333;
+            --fship-bg-gray: #F4F7F9;
+            --container-width: 1080px;
+            --section-padding: 70px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--fship-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #fff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        a:hover { opacity: 0.7; }
+        img { max-width: 100%; height: auto; vertical-align: bottom; }
+
+        /* ヘッダー */
+        header {
+            background: #fff;
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: relative; z-index: 10;
+        }
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        .hamburger { display: flex; flex-direction: column; justify-content: space-between; width: 24px; height: 18px; cursor: pointer; }
+        .hamburger span { display: block; height: 2px; width: 100%; background: var(--fship-text); }
+        .logo-area img { width: 160px; }
+
+        .search-box-area { display: flex; flex-direction: column; align-items: flex-end; }
+        .search-label { font-size: 11px; color: var(--fship-blue); margin-bottom: 5px; }
+        .search-ui { display: flex; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
+        .search-select { padding: 10px 15px; border-right: 1px solid #ddd; background: #fff; font-size: 13px; color: #666; cursor: pointer; display: flex; align-items: center; justify-content: space-between; min-width: 140px; }
+        .search-select::after { content: "▼"; font-size: 10px; margin-left: 10px; }
+        .search-btn { background: var(--fship-blue); color: #fff; border: none; padding: 10px 30px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.3s; }
+
+        /* ヒーローセクション */
+        .hero {
+            position: relative;
+            height: 500px;
+            background: url('https://images.unsplash.com/photo-1542744094-24638eff58bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+            display: flex;
+            align-items: center;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 20, 40, 0.5);
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            color: #fff;
+        }
+        .hero-tag {
+            color: #fff;
+            font-weight: 900; font-size: 16px; margin-bottom: 15px; display: block;
+            letter-spacing: 0.05em;
+        }
+        .hero-title {
+            font-size: 48px; font-weight: 900; line-height: 1.2; margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .hero-desc {
+            font-size: 18px; font-weight: 500; margin-bottom: 40px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+        }
+        .hero-btn {
+            display: inline-block;
+            background: var(--fship-blue);
+            color: #fff;
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0, 160, 233, 0.4);
+            transition: 0.3s;
+        }
+
+        /* 青いナビバー */
+        .top-bar { background-color: var(--fship-blue); color: #fff; padding: 12px 0; text-align: center; font-size: 13px; font-weight: 700; }
+        .top-bar .inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+
+        /* 共通セクション */
+        section { padding: var(--section-padding) 20px; max-width: var(--container-width); margin: 0 auto; }
+        .bg-light { background-color: var(--fship-bg-gray); max-width: 100%; }
+        .section-title { margin-bottom: 40px; text-align: left; }
+        .en-label { display: block; color: var(--fship-blue); font-weight: 800; font-size: 14px; margin-bottom: 10px; letter-spacing: 0.1em; }
+        .jp-label { font-size: 32px; font-weight: 900; position: relative; padding-bottom: 15px; }
+        .jp-label::after { content: ""; position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background: var(--fship-blue); }
+
+        /* コンセプトセクション */
+        .flex-box { display: flex; gap: 50px; align-items: center; margin-bottom: 20px; }
+        .text-content { flex: 1; }
+        .text-content p { margin-bottom: 15px; font-size: 15px; }
+        .img-content { flex: 1; position: relative; }
+        .img-content img { border-radius: 12px; box-shadow: 15px 15px 0 #E1EEF5; }
+
+        /* 特長（FEATURES） */
+        .features-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+        .feature-card { background: #fff; border: 1px solid #E7EEF4; border-radius: 12px; padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.04); text-align: center; }
+        .feature-icon { width: 60px; height: 60px; margin: 0 auto 20px; background-color: var(--fship-bg-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .feature-icon img { width: 35px; height: 35px; opacity: 0.8; }
+        .feature-top { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; }
+        .feature-no { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--fship-blue); color: var(--fship-blue); font-weight: 900; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; }
+        .feature-title { color: var(--fship-blue); font-weight: 900; font-size: 18px; line-height: 1.3; }
+        .feature-sub { font-weight: 900; font-size: 15px; margin-bottom: 12px; color: #111; }
+        .feature-desc { font-size: 14px; color: #666; line-height: 1.7; }
+
+        /* グリッドレイアウト */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
+        .grid-item { background: #fff; padding: 40px 30px; border-radius: 12px; border-bottom: 6px solid var(--fship-blue); box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; font-weight: 700; font-size: 18px; }
+
+        /* 取引先企業セクション */
+        .client-category { margin-bottom: 40px; }
+        .category-name { font-weight: 900; font-size: 18px; margin-bottom: 20px; color: #333; }
+        .client-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #eee; border: 1px solid #eee; }
+        .client-box { background: #fff; padding: 30px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .client-name { font-size: 12px; color: #666; margin-top: 15px; font-weight: 500; }
+        .logo-placeholder { font-weight: 900; font-size: 20px; color: #333; height: 40px; display: flex; align-items: center; }
+
+        /* CTA */
+        .cta-box { background: #fff; border: 3px solid var(--fship-blue); padding: 60px; border-radius: 20px; text-align: center; max-width: 800px; margin: 0 auto; }
+        .btn-large { display: inline-block; background: var(--fship-blue); color: #fff; padding: 20px 70px; border-radius: 100px; font-weight: 900; font-size: 20px; box-shadow: 0 10px 20px rgba(0, 160, 233, 0.3); }
+
+        /* フッター */
+        .footer-container { background: #fff; padding: 80px 5% 60px; border-top: 1px solid #eee; }
+        .footer-main { display: flex; justify-content: space-between; align-items: flex-start; max-width: 1100px; margin: 0 auto; }
+        .footer-left .f-logo { width: 200px; margin-bottom: 15px; }
+        .footer-left .f-tagline { color: var(--fship-blue); font-weight: 700; font-size: 14px; letter-spacing: 0.1em; }
+        .footer-right { display: flex; flex-direction: column; align-items: flex-end; }
+        .footer-links { list-style: none; display: flex; gap: 30px; margin-bottom: 30px; }
+        .footer-links li a { font-weight: 700; font-size: 14px; color: #333; }
+        .footer-connect { font-weight: 700; font-size: 18px; color: var(--fship-blue); }
+        .footer-bottom { background-color: var(--fship-blue); color: #fff; text-align: center; padding: 20px 0; font-size: 13px; }
+
+        @media (max-width: 900px) { .features-wrap { grid-template-columns: 1fr; } .flex-box { flex-direction: column; } }
+        @media (max-width: 768px) { .client-grid { grid-template-columns: 1fr; } .hero-title { font-size: 32px; } .footer-main { flex-direction: column; align-items: center; text-align: center; gap: 40px; } .footer-right { align-items: center; } .footer-links { flex-direction: column; gap: 15px; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="hamburger"><span></span><span></span><span></span></div>
+            <div class="logo-area">
+                <a href="https://www.f-ship.jp/"><img src="image_3e4346.png" alt="Fellowship"></a>
+            </div>
+        </div>
+        <div class="search-box-area">
+            <span class="search-label">あなたに合う働き方を、いっしょに</span>
+            <div class="search-ui">
+                <div class="search-select">雇用形態 / EMPLOYMENT</div>
+                <div class="search-select">職種 / JOB</div>
+                <button class="search-btn">検索</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-inner">
+            <span class="hero-tag">WEB CREATIVE SPECIALIST</span>
+            <h1 class="hero-title">企画と制作に強い<br>Webディレクター・デザイナー派遣</h1>
+            <p class="hero-desc">制作現場の「質」と「スピード」を最大化する、<br>即戦力のクリエイティブ人材をご提案します。</p>
+            <a href="https://www.f-ship.jp/inquiry/" class="hero-btn">まずはご相談ください</a>
+        </div>
+    </div>
+
+    <div class="top-bar">
+        <div class="inner">
+            <a href="https://www.f-ship.jp/jobsearch/global/">グロキャリ/GLOBAL</a>
+            <a href="https://www.f-ship.jp/jobsearch/global-engineer/">エンジニア</a>
+            <a href="https://www.f-ship.jp/jobsearch/shoukai/">正社員</a>
+            <a href="https://www.f-ship.jp/jobsearch/haken/">派遣</a>
+            <a href="https://www.f-ship.jp/jobsearch/super-assistant/">スーパーアシスタント</a>
+            <a href="https://www.f-ship.jp/inquiry/">CONTACT US</a>
+            <a href="https://www.f-ship.jp/clients/">企業採用ご担当者</a>
+        </div>
+    </div>
+
+    <section>
+        <div class="section-title">
+            <span class="en-label">CONCEPT</span>
+            <h2 class="jp-label">私たちのクリエイティブ派遣とは</h2>
+        </div>
+        <div class="flex-box">
+            <div class="text-content">
+                <p style="font-size: 18px; font-weight: 700; color: var(--fship-blue);">ビジネスを理解し、カタチにする力を提供。</p>
+                <p>単に「作る」だけでなく、事業目的を汲み取れるWebディレクターや、ユーザー体験を最適化できるデザイナーを厳選。リモートワークや最新ツール（Figma, Slack等）への適応力も高い人材が揃っています。</p>
+            </div>
+            <div class="img-content">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creative Meeting">
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-light">
+        <section>
+            <div class="section-title">
+                <span class="en-label">FEATURES</span>
+                <h2 class="jp-label">Fellowship「クリエイティブ派遣」の特長</h2>
+            </div>
+            <div class="features-wrap">
+                <div class="feature-card">
+                    <div class="feature-icon"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055666.png" alt="Creative Icon"></div>
+                    <div class="feature-top"><span class="feature-no">①</span><div class="feature-title">確かな実績とスキル</div></div>
+                    <div class="feature-sub">ポートフォリオに基づく厳格な審査</div>
+                    <p class="feature-desc">デザインセンス、マークアップの正確性、進行管理能力をプロが事前にチェック。ミスマッチを防ぎます。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><img src="https://cdn-icons-png.flaticon.com/512/954/954574.png" alt="Communication Icon"></div>
+                    <div class="feature-top"><span class="feature-no">②</span><div class="feature-title">コミュニケーションの質</div></div>
+                    <div class="feature-sub">「調整力」のあるディレクター</div>
+                    <p class="feature-desc">クライアントやエンジニアの間に入り、論理的な説明とスムーズな進行を支援する人材を派遣します。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><img src="https://cdn-icons-png.flaticon.com/512/1162/1162456.png" alt="Speed Icon"></div>
+                    <div class="feature-top"><span class="feature-no">③</span><div class="feature-title">柔軟なリソース確保</div></div>
+                    <div class="feature-sub">繁忙期や欠員への迅速な対応</div>
+                    <p class="feature-desc">急なプロジェクト増員や、産休・退職による欠員補充など、必要なタイミングで最適なスキルを供給します。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section>
+        <div class="section-title">
+            <span class="en-label">SERVICE</span>
+            <h2 class="jp-label">対応領域</h2>
+        </div>
+        <div class="grid">
+            <div class="grid-item">Webディレクター<br><span style="font-size:13px; color:#999; font-weight:400;">（進行管理／要件定義／IA設計）</span></div>
+            <div class="grid-item">Webデザイナー<br><span style="font-size:13px; color:#999; font-weight:400;">（UI/UXデザイン／バナー制作）</span></div>
+            <div class="grid-item">フロントエンド<br><span style="font-size:13px; color:#999; font-weight:400;">（HTML/CSS/JavaScript/CMS実装）</span></div>
+        </div>
+    </section>
+
+    <div class="bg-light">
+        <section>
+            <div class="section-title">
+                <span class="en-label">EXPERTISE</span>
+                <h2 class="jp-label">得意とする制作案件</h2>
+            </div>
+            <div class="grid">
+                <div class="grid-item">ECサイト運用</div>
+                <div class="grid-item">コーポレートサイト</div>
+                <div class="grid-item">キャンペーンLP</div>
+                <div class="grid-item">自社SaaS/Webアプリ</div>
+            </div>
+        </section>
+    </div>
+
+    <section>
+        <div class="section-title">
+            <span class="en-label">CLIENTS</span>
+            <h2 class="jp-label">取引先企業（一部）</h2>
+        </div>
+        <div class="client-category">
+            <p class="category-name">IT・Web業界</p>
+            <div class="client-grid">
+                <div class="client-box"><div class="logo-placeholder">CyberAgent.</div><p class="client-name">株式会社サイバーエージェント</p></div>
+                <div class="client-box"><div class="logo-placeholder">:DeNA</div><p class="client-name">株式会社ディー・エヌ・エー</p></div>
+                <div class="client-box"><div class="logo-placeholder" style="color:#e60012;">FUJITSU</div><p class="client-name">富士通コミュニケーションサービス株式会社</p></div>
+            </div>
+        </div>
+        <div class="client-category">
+            <p class="category-name">ゲーム・エンタメ業界</p>
+            <div class="client-grid">
+                <div class="client-box"><div class="logo-placeholder" style="color:#0089ca;">SEGA®</div><p class="client-name">株式会社セガ</p></div>
+                <div class="client-box"><div class="logo-placeholder" style="color:#9e519e;">GungHo</div><p class="client-name">ガンホー・オンライン・エンターテイメント株式会社</p></div>
+                <div class="client-box"><div class="logo-placeholder" style="color:#6ab293;">BANK OF INNOVATION</div><p class="client-name">株式会社バンク・オブ・イノベーション</p></div>
+            </div>
+        </div>
+        <div class="client-category">
+            <p class="category-name">広告・メディア業界</p>
+            <div class="client-grid">
+                <div class="client-box"><div class="logo-placeholder">ADK&lt;</div><p class="client-name">株式会社アサツー ディ・ケイ</p></div>
+                <div class="client-box"><div class="logo-placeholder">DENTSU PUBLIC RELATIONS</div><p class="client-name">株式会社電通パブリックリレーションズ</p></div>
+                <div class="client-box"><div class="logo-placeholder" style="color:#e60012;">FreakOut</div><p class="client-name">株式会社フリークアウト</p></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-light">
+        <section>
+            <div class="cta-box">
+                <h3 style="font-size: 26px; font-weight: 900; margin-bottom: 20px;">制作現場のリソース課題を解決します</h3>
+                <p style="color: #666; margin-bottom: 40px; font-size: 16px;">豊富なクリエイター人材の中から、貴社のプロジェクトに最適な布陣をご提案いたします。<br>まずはお気軽にご相談ください。</p>
+                <a href="https://www.f-ship.jp/inquiry/" class="btn-large">問い合わせフォームへ</a>
+            </div>
+        </section>
+    </div>
+
+    <div class="footer-container">
+        <div class="footer-main">
+            <div class="footer-left">
+                <img src="image_3e4346.png" alt="Fellowship" class="f-logo">
+                <p class="f-tagline">BUILD A GLOBAL CAREER</p>
+            </div>
+            <div class="footer-right">
+                <ul class="footer-links">
+                    <li><a href="#">ABOUT US</a></li>
+                    <li><a href="#">採用情報</a></li>
+                    <li><a href="#">PRIVACY POLICY</a></li>
+                    <li><a href="#">SITE MAP</a></li>
+                </ul>
+                <p class="footer-connect">CONNECT WITH US</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        (C) 2026 Fellowship Co., Ltd. All Rights Reserved.
+    </div>
+
+</body>
+</html>
